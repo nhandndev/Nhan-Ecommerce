@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Cơ sở dữ liệu PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: ecom-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: nhan_ecom_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ecom-network
+
+volumes:
+  postgres_data:
+
+networks:
+  ecom-network:
+    driver: bridge

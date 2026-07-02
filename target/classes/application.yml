@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: ecommerce
+
+  # Cấu hình Kết nối PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5433/nhan_ecom_db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  # Cấu hình Hibernate JPA
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # Tự động tạo và cập nhật bảng từ Java Entity (Rất tiện khi học/dev)
+    show-sql: true     # In các câu lệnh SQL ra Console để bạn dễ theo dõi và debug
+    properties:
+      hibernate:
+        format_sql: true # Định dạng câu SQL rõ ràng, dễ đọc
+
+# Cấu hình Web Server
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1 # Tiền tố chuẩn cho các RESTful API của bạn
