@@ -3,6 +3,8 @@ package com.nhanshop.ecommerce.user.entity;
 import com.nhanshop.ecommerce.common.Entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.HashSet;
@@ -10,6 +12,8 @@ import java.util.Set;
 
 
 @Entity
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "Roles")
 public class Role extends BaseEntity {
