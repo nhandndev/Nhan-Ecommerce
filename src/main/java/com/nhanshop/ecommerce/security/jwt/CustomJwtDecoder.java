@@ -1,16 +1,49 @@
 package com.nhanshop.ecommerce.security.jwt;
 
+import com.nhanshop.ecommerce.common.exception.AppException;
 import com.nhanshop.ecommerce.user.entity.User;
+import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JOSEObjectType;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
+
+import javax.crypto.spec.SecretKeySpec;
+import java.text.ParseException;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class CustomJwtDecoder {
+public class CustomJwtDecoder implements JwtDecoder {
+    private final JwtUtils jwtUtils;
 
+    @Value("${jwt.signKey}")
+    private String SIGN_KEY;
+
+    private NimbusJwtDecoder nimbusJwtDecoder;
+
+    @Override
+    public Jwt decode(String token) throws JwtException {
+        try {
+            jwtUtils.verifyToken(token);
+        } catch (JOSEException | ParseException | AppException e) {
+            throw new JwtException("Token invalid");
+        }
+
+        if (Objects.isNull(nimbusJwtDecoder)) {
+            SecretKeySpec secretKeySpec = new SecretKeySpec(SIGN_KEY.getBytes(), "HmacSHA256");
+
+            nimbusJwtDecoder =
+                    NimbusJwtDecoder.withSecretKey(secretKeySpec).macAlgorithm(MacAlgorithm.HS256).build();
+        }
+
+        return nimbusJwtDecoder.decode(token);
     }
 }
