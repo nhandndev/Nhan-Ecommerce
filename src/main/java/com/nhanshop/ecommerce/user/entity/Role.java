@@ -1,6 +1,6 @@
 package com.nhanshop.ecommerce.user.entity;
 
-import com.nhanshop.ecommerce.common.Entity.BaseEntity;
+import com.nhanshop.ecommerce.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

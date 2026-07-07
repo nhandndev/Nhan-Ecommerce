@@ -19,9 +19,11 @@ public enum ErrorCode {
     INVALID_CREDENTIALS(1005, "Email hoặc mật khẩu đăng nhập không chính xác.", HttpStatus.UNAUTHORIZED),
     ACCOUNT_LOCKED(1006, "Tài khoản của bạn hiện đã bị khóa.", HttpStatus.FORBIDDEN),
 
-    USER_EXISTED(2001, "Địa chỉ Email này đã được đăng ký trên hệ thống.", HttpStatus.BAD_REQUEST),
+    USER_EXISTED(2001, "User này đã được đăng ký trên hệ thống.", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND(2002, "Không tìm thấy người dùng trên hệ thống.", HttpStatus.NOT_FOUND),
     ROLE_NOT_FOUND(2003, "Không tìm thấy vai trò (Role) tương ứng trong DB.", HttpStatus.INTERNAL_SERVER_ERROR),
+    EMAIL_EXISTED(2004, "Địa chỉ Email này đã được đăng ký trên hệ thống.", HttpStatus.INTERNAL_SERVER_ERROR),
+    PHONE_NUMBER_EXISTED(2005, "Phone Number này đã được đăng ký trên hệ thống.", HttpStatus.INTERNAL_SERVER_ERROR),
 
     PRODUCT_NOT_FOUND(3001, "Sản phẩm không tồn tại hoặc đã bị gỡ bỏ.", HttpStatus.NOT_FOUND),
     INSUFFICIENT_STOCK(3002, "Số lượng hàng trong kho không đủ đáp ứng.", HttpStatus.BAD_REQUEST),
