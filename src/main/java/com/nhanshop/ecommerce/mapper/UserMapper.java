@@ -12,8 +12,7 @@ public interface UserMapper {
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "id", ignore = true)
     User toUser(RegisterRequest registerRequest);
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "roleToStringSet")
-    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "roles", source = "roles")
     UserResponse toUserResponse(User user);
 
 }
