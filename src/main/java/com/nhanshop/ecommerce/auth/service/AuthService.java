@@ -30,9 +30,7 @@ public class AuthService {
     @Transactional
     public UserResponse register(RegisterRequest registerRequest){
         User user = userMapper.toUser(registerRequest);
-        if(userRepository.existsById(user.getId())) {
-            throw new AppException(ErrorCode.USER_EXISTED);
-        }
+
         if(userRepository.existsByemail(user.getEmail())){
             throw new AppException((ErrorCode.EMAIL_EXISTED));
         }

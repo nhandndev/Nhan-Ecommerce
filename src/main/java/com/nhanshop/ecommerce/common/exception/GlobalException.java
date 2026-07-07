@@ -34,7 +34,7 @@ public class GlobalException {
         ErrorCode errorCode = ErrorCode.UNCATEGORIZED_EXCEPTION;
         ApiResponse apiResponse = ApiResponse.builder()
                 .code(errorCode.getCode())
-                .message(errorCode.getMessage())
+                .message(e.getMessage())
                 .build();
         return ResponseEntity.status(errorCode.getHttpStatus()).body(apiResponse);
     }
