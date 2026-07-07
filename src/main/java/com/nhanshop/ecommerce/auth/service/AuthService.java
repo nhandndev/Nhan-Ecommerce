@@ -40,6 +40,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
        Role role = roleRepository.findByName("BUYER").orElseThrow(()->new AppException(ErrorCode.ROLE_NOT_FOUND));
         Set<Role> roles = new HashSet<>();
+
         roles.add(role);
         user.setRoles(roles);
         user.setStatus(UserStatus.ACTIVE);

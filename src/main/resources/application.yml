@@ -13,13 +13,25 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create # Tự động tạo và cập nhật bảng từ Java Entity (Rất tiện khi học/dev)
+      ddl-auto: create # create: tạo lại bảng mỗi lần start → seed SQL chạy sau để nạp data
+    defer-datasource-initialization: true # Chạy SQL seed SAU khi Hibernate tạo bảng xong
     show-sql: true     # In các câu lệnh SQL ra Console để bạn dễ theo dõi và debug
     properties:
       hibernate:
         globally_quoted_identifiers: true
         format_sql: true # Định dạng câu SQL rõ ràng, dễ đọc
         default_schema: public
+
+  # Tự động chạy seed SQL khi khởi động (sau khi Hibernate tạo bảng xong)
+  sql:
+    init:
+      mode: always
+      separator: ";\n" # Tách các câu lệnh SQL theo dấu ; + newline
+      continue-on-error: true # Bỏ qua lỗi nếu data đã tồn tại
+      data-locations:
+        - classpath:db/seed/01_seed_permissions.sql
+        - classpath:db/seed/02_seed_roles.sql
+        - classpath:db/seed/03_seed_users.sql
 
 # Cấu hình Web Server
 server:
